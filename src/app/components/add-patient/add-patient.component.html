@@ -1,0 +1,48 @@
+<!-- Generate template driven form to insert patient
+ where Patient will have below properties
+   pId: number;
+  pName: string;
+  pAddress: string;
+  pAge: number;
+  pPhone: string;
+  pEmail: string;
+  pDiseases: string[];
+  pHealthHistory: string;
+}
+After clicking on add patient button data should be added in db.json file
+-->
+<form #patientForm="ngForm">
+  <div class="form-group">
+    <label for="pId">Patient ID:</label>
+    <input type="number" class="form-control" id="pId" name="pId" ngModel required>
+  </div>
+  <div class="form-group">
+    <label for="pName">Patient Name:</label>
+    <input type="text" class="form-control" id="pName" name="pName" ngModel required>
+  </div>
+  <div class="form-group">
+    <label for="pAddress">Patient Address:</label>
+    <input type="text" class="form-control" id="pAddress" name="pAddress" ngModel required>
+  </div>
+  <div class="form-group">
+    <label for="pAge">Patient Age:</label>
+    <input type="number" class="form-control" id="pAge" name="pAge" ngModel required>
+  </div>
+  <div class="form-group">
+    <label for="pPhone">Patient Phone:</label>
+    <input type="text" class="form-control" id="pPhone" name="pPhone" ngModel required>
+  </div>
+  <div class="form-group">
+    <label for="pEmail">Patient Email:</label>
+    <input type="email" class="form-control" id="pEmail" name="pEmail" ngModel required>
+  </div>
+  <div class="form-group">
+    <label for="pDiseases">Patient Diseases:</label>
+    <input type="text" class="form-control" id="pDiseases" name="pDiseases" ngModel required>
+  </div>
+  <div class="form-group">
+    <label for="pHealthHistory">Patient Health History:</label>
+    <textarea class="form-control" id="pHealthHistory" name="pHealthHistory" ngModel required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="addPatient(patientForm)">Add Patient</button>
+</form>

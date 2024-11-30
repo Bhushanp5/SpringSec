@@ -1,0 +1,64 @@
+@startuml
+!include <C4/C4_Component>
+
+participant Browser
+participant index.html
+participant main.ts
+participant "AppRoutingModule" as appRouting
+participant "AuthGuard" as authGuard
+participant "AddPatientComponent" as addComp
+participant "DeletePatientComponent" as deleteComp
+participant "UpdatePatientComponent" as updateComp
+participant "PatientService" as patientSvc
+
+Browser -> index.html: Requests application
+activate index.html
+  index.html -> main.ts: Bootstraps application
+  activate main.ts
+    main.ts -> appRouting: Initializes routing
+    activate appRouting
+      Browser -> appRouting: Navigates to "/patients/add"
+      appRouting -> authGuard: Checks authentication
+      activate authGuard
+        authGuard -> appRouting: Returns authentication result (assume success)
+      deactivate authGuard
+      appRouting -> addComp: Activates AddPatientComponent
+      activate addComp
+        addComp -> patientSvc: Calls createPatient(patientData)
+        activate patientSvc
+          patientSvc -> "Backend API": Sends POST request
+          patientSvc -> addComp: Returns created patient data
+        deactivate patientSvc
+      deactivate addComp
+
+      Browser -> appRouting: Navigates to "/patients/delete/123"
+      appRouting -> authGuard: Checks authentication
+      activate authGuard
+        authGuard -> appRouting: Returns authentication result (assume success)
+      deactivate authGuard
+      appRouting -> deleteComp: Activates DeletePatientComponent (with ID 123)
+      activate deleteComp
+        deleteComp -> patientSvc: Calls deletePatient(123)
+        activate patientSvc
+          patientSvc -> "Backend API": Sends DELETE request
+          patientSvc -> deleteComp: Returns success/error
+        deactivate patientSvc
+      deactivate deleteComp
+
+      Browser -> appRouting: Navigates to "/patients/update/456"
+      appRouting -> authGuard: Checks authentication
+      activate authGuard
+        authGuard -> appRouting: Returns authentication result (assume success)
+      deactivate authGuard
+      appRouting -> updateComp: Activates UpdatePatientComponent (with ID 456)
+      activate updateComp
+        updateComp -> patientSvc: Calls updatePatient(456, updatedData)
+        activate patientSvc
+          patientSvc -> "Backend API": Sends PUT request
+          patientSvc -> updateComp: Returns updated patient data
+        deactivate patientSvc
+      deactivate updateComp
+    deactivate appRouting
+  deactivate main.ts
+deactivate index.html
+@enduml

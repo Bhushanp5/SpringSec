@@ -1,0 +1,26 @@
+@startuml
+!include <C4/C4_Component>
+
+COMPONENT "PatientManagement" {
+  COMPONENT "AddPatientComponent"
+  COMPONENT "DeletePatientComponent"
+  COMPONENT "UpdatePatientComponent"
+
+  REL "AddPatientComponent" --> "PatientService" : uses
+  REL "DeletePatientComponent" --> "PatientService" : uses
+  REL "UpdatePatientComponent" --> "PatientService" : uses
+}
+
+COMPONENT "PatientService" {
+}
+
+COMPONENT "PatientRoute" {
+  REL "PatientRoute" --> "AuthGuard" : uses
+}
+
+COMPONENT "AuthGuard" {
+}
+
+REL "PatientManagement" --> "PatientRoute" : uses
+
+@enduml
