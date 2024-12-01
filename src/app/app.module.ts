@@ -8,6 +8,7 @@ import { DeletePatientComponent } from './components/delete-patient/delete-patie
 import { GetAllPatientsComponent } from './components/get-all-patients/get-all-patients.component';
 import { GetPatientByIdComponent } from './components/get-patient-by-id/get-patient-by-id.component';
 import { UpdatePatientComponent } from './components/update-patient/update-patient.component';
+import { FormatnMePipe } from './formatn-me.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { UpdatePatientComponent } from './components/update-patient/update-patie
     DeletePatientComponent,
     UpdatePatientComponent,
     GetAllPatientsComponent,
-    GetPatientByIdComponent
+    GetPatientByIdComponent,
+    FormatnMePipe
   ],
   imports: [
     BrowserModule,
